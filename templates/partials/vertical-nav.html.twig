@@ -1,0 +1,26 @@
+<div class="fixed-bar fl-wrap">
+    <div class="user-profile-menu-wrap fl-wrap">
+        {# announcement #}
+        <div class="user-profile-menu">
+            <h3>Annonces</h3>
+            <ul>
+                <li><a href="{{ path('front_meal_index') }}"><i class="fa fa-th-list"></i>Mes repas</a></li>
+                <li><a href="{{ path('front_meal_all') }}"><i class="fa fa-th-list"></i>Tous les repas</a></li>
+                <li><a href="{{ path('front_booking_index') }}"><i class="fa fa-calendar-check-o"></i>Réservations</a></li>
+                <li><a href="{{ path('front_notation_user_notations') }}"><i class="fa fa-comments-o"></i>Commentaires</a></li>
+            </ul>
+        </div>
+        {# announcement end #}
+        {# parameters #}
+        <div class="user-profile-menu">
+            <h3>Paramètres</h3>
+            <ul>
+                <li><a href="{{ path('front_user_edit',{'id':app.user.id}) }}"><i class="fa fa-user-o"></i>Modifier Profil</a></li>{#class="user-profile-act"#}
+                <li><a href="{{ path('front_message_index') }}"><i class="fa fa-envelope-o"></i>Messages<span>{{ app.user.getUnreadRecievedMessage }}</span></a></li>
+            </ul>
+        </div>
+        {# parameters end #}
+        {# disconnect #}
+        <a href="{{ path('front_logout') }}" class="log-out-btn">Deconnexion</a>
+    </div>
+</div>

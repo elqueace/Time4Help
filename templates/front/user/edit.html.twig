@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {# section #}
+    <section>
+        {# container #}
+        <div class="container">
+            {# profile-edit-wrap #}
+            <div class="profile-edit-wrap">
+                <div class="profile-edit-page-header">
+                    <h2>Modifier profil</h2>
+                    <div class="breadcrumbs">
+                        <a href="{{ path('front_page_home') }}">Acceuil</a>
+                        <span>Modifier profil</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        {% include 'partials/vertical-nav.html.twig' %}
+                    </div>
+                    <div class="col-md-7">
+                        {# profile-edit-container #}
+                        <div class="profile-edit-container">
+                            <div class="profile-edit-header fl-wrap">
+                                <h4>Mon compte</h4>
+                            </div>
+                            <div class="custom-form">
+                                {{ include('front/user/_form.html.twig') }}
+                            </div>
+                        </div>
+                        {# profile-edit-container end #}
+                    </div>
+                    <div class="col-md-2">
+                        <div class="custom-form">
+                            {{ include('front/user/_avatar_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# profile-edit-wrap end #}
+        </div>
+        {# container end #}
+    </section>
+    {# section end #}
+    <div class="limit-box fl-wrap"></div>
+    {# section #}
+    <section class="gradient-bg">
+        <div class="cirle-bg">
+            <div class="bg" data-bg="images/bg/circle.png"></div>
+        </div>
+    </section>
+    {# section end #}
+    <a class="to-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+    <script>
+        var $collectionHolder;
+        // setup an "add a tag" link
+        var $addPictureButton = $('<button type="button" class="add_picture_link">Add a picture</button>');
+        var $newLinkLi = $('<li></li>').append($addPictureButton);
+
+        jQuery(document).ready(function () { // Get the ul that holds the collection of tags
+            $collectionHolder = $('ul.pictures');
+
+            // add the "add a tag" anchor and li to the tags ul
+            $collectionHolder.append($newLinkLi);
+
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+            $addPictureButton.on('click', function (e) { // add a new tag form (see next code block)
+                console.log('test');
+                addPictureForm($collectionHolder, $newLinkLi);
+            });
+        });
+
+        function addPictureForm($collectionHolder, $newLinkLi) { // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+            // get the new index
+            var index = $collectionHolder.data('index');
+
+            var newForm = prototype;
+            // You need this only if you didn't set 'label' => false in your tags field in TaskType
+            // Replace '__name__label__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            // newForm = newForm.replace(/__name__label__/g, index);
+
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            newForm = newForm.replace(/__name__/g, index);
+
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+    </script>
+{% endblock %}

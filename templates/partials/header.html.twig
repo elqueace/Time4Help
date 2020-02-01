@@ -1,0 +1,58 @@
+<!-- header -->
+
+  <div class="heading-opacity"></div>
+  <header>
+    <div class="overlay">
+      <a href="#">
+        <i class="fa fa-times"></i>
+      </a>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 clearfix map_header">
+          <a href="#" class="menu_xs">
+            <i class="fa fa-bars"></i>
+          </a>
+          <a href="{{ path('front_page_home') }}" class="logo">
+            Frame
+            <span class="quotes">:</span>
+            <span class="dating">FreeLance</span>
+
+          </a>
+
+          <div class="menu-header-container">
+            <nav>
+              <ul id="menu-header" class="navigate head_nav navigate">
+
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+                <li id="nav-menu-item-1855" class="menu-item menu-item-type-post_type menu-item-object-page">
+                  <a   href="auth.html">Creer un repas</a>
+                </li>
+                <li id="" class="menu-item menu-item-type-post_type menu-item-object-page">
+                  <a   href="auth.html">Deconnexion</a>
+                </li>
+                <a href="{{ path('front_user_edit', {'id': app.user.id}) }}">
+                <div class="show-reg-form modal-opn" style="top:15px;">
+                    <img src="{{ asset(app.user.avatar) }}" alt="image de profile" class="user-avatar"/>
+                </div>
+                </a>
+                        {% else %}
+                <li id="" class="menu-item menu-item-type-post_type menu-item-object-page">
+                  <a   href="{{ path('front_security_register') }}">Inscription</a>
+                </li>
+                <li id="" class="menu-item menu-item-type-post_type menu-item-object-page">
+                  <a   href="{{ path('front_security_login') }}">Se connecter</a>
+                </li>
+                <li id="" class="menu-item menu-item-type-post_type menu-item-object-page">
+                  <a   href="{{ path('front_page_home') }}#concept">Concept</a>
+                </li>
+                        {% endif %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+

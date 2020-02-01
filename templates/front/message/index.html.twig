@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {# section #}
+    <section id="sec1">
+        {# container #}
+        <div class="container">
+            {# profile-edit-wrap #}
+            <div class="profile-edit-wrap">
+                <div class="profile-edit-page-header">
+                    <h2>Messages</h2>
+                    <div class="breadcrumbs">
+                        <a href="{{ path('front_page_home') }}">Acceuil</a>
+                        <span>Messages</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        {% include 'partials/vertical-nav.html.twig' %}
+                    </div>
+                    <div class="col-md-9">
+                        <div class="dashboard-list-box fl-wrap">
+                            <div class="dashboard-header fl-wrap">
+                                <h3>Toutes les conversations</h3>
+                            </div>
+                            {% for message in messages %}
+                                    <div class="dashboard-list">
+                                        <div class="dashboard-message">
+                                            {% if message.status == "envoyé" and message.receiver == app.user %}
+                                                <span class="new-dashboard-item">Nouveau message</span>
+                                            {% endif %}
+                                            <div class="dashboard-message-avatar">
+                                                <a href="{{ path('front_message_show', {'id': message.sender == app.user ? message.receiver.id : message.sender.id}) }}">
+                                                    <img src="{{ message.sender.getAvatar() or message.receiver.getAvatar() ? (message.receiver == app.user ? asset(message.sender.getAvatar()) : asset(message.receiver.getAvatar())) : '/images/favicon/default-avatar.png' }}" alt="image de profile">
+                                                </a>
+                                            </div>
+                                            <div class="dashboard-message-text">
+                                                <h4 class="msg-user-name">
+                                                    <a href="{{ path('front_message_show', {'id': message.sender == app.user ? message.receiver.id : message.sender.id}) }}">
+                                                        {{ message.sender == app.user ? message.receiver.getUserName() : message.sender.getUserName() }}
+                                                    </a>
+                                                </h4>
+                                                <p class="{{ message.status == "envoyé" and message.receiver == app.user ? "msg-content msg-noread" : "msg-content" }}">
+                                                    {% if message.sender == app.user %}
+                                                        <b>Vous</b>
+                                                    {% endif %}
+                                                    {{ message.content }}
+                                                </p>
+                                                <div class="msg-infos">
+                                                    <span class="reply-mail clearfix">{{ message.status == "envoyé" and message.receiver == app.user ? "reçu" : message.status }}</span>
+                                                    <span class="msg-datetime">{{ message.createdAt | date("m/d/Y H:i", "Europe/Paris") }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            {% else %}
+                                <tr>
+                                    <td colspan="13">Vous n'avez aucun messages.</td>
+                                </tr>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# profile-edit-wrap end #}
+        </div>
+        {# container end #}
+    </section>
+    {# section end #}
+    <div class="limit-box fl-wrap"></div>
+    {# section #}
+    <section class="gradient-bg">
+        <div class="cirle-bg">
+            <div class="bg" data-bg="images/bg/circle.png"></div>
+        </div>
+    </section>
+    {# section end #}
+    <a class="to-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+{% endblock %}

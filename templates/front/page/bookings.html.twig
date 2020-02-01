@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+                    <!--section -->
+                    <section id="sec1">
+                        <!-- container -->
+                        <div class="container">
+                            <!-- profile-edit-wrap -->
+                            <div class="profile-edit-wrap">
+                                <div class="profile-edit-page-header">
+                                    <h2>Bookings</h2>
+                                    <div class="breadcrumbs fl-wrap"><a href="{{ path('front_page_home') }}">Acceuil</a><a href="#">Administration</a><span>Réservations</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        {% include 'partials/vertical-nav.html.twig' %}
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="dashboard-list-box fl-wrap">
+                                            <div class="dashboard-header fl-wrap">
+                                                <h3>Bookings</h3>
+                                            </div>
+                                            {% for  booking in bookings %}
+                                                <!-- dashboard-list end-->
+                                                <div class="dashboard-list">
+                                                    <div class="dashboard-message">
+                                                        <span class="new-dashboard-item">New</span>
+                                                        <div class="dashboard-message-avatar">
+                                                            {% for  picture in booking.meal.pictures %}
+                                                                <img src="{{ picture.path }}" alt="">
+                                                            {% endfor %}
+                                                        </div>
+                                                        <div class="dashboard-message-text">
+                                                            <h4>{{ booking.meal.host.firstName }} - {{ booking.meal.host.lastName }} <h4> <span></span></h4>
+                                                            <div class="booking-details fl-wrap">
+                                                                <span class="booking-title">Price</span> :
+                                                                <span class="booking-text"><a href="listing-sinle.html">{{ booking.meal.price }}</a> € </span>
+                                                            </div>
+                                                            <div class="booking-details fl-wrap">
+                                                                <span class="booking-title">Persons </span> :
+                                                                <span class="booking-text"> {{ booking.meal.maxTraveller }} Peoples</span>
+                                                            </div>
+                                                            <div class="booking-details fl-wrap">
+                                                                <span class="booking-title">Booking Date </span> :
+                                                                <span class="booking-text">{{ booking.meal.dateMeal |date("m/d/Y")}}</span>
+                                                            </div>
+                                                            <div class="booking-details fl-wrap">
+                                                                <span class="booking-title">Mail</span> :
+                                                                <span class="booking-text"><a href="#" target="_top">{{ booking.meal.host.email }}</a></span>
+                                                            </div>
+                                                            <div class="booking-details fl-wrap">
+                                                                <span class="booking-title">Phone</span> :
+                                                                <span class="booking-text"><a href="tel:+496170961709" target="_top">{{ booking.meal.host.phone }}</a></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+                                            <!-- dashboard-list end-->
+                                        </div>
+                                        <!-- pagination-->
+                                        <div class="pagination">
+                                            <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
+                                            <a href="#" class="current-page">1</a>
+                                            <a href="#">2</a>
+                                            <a href="#">3</a>
+                                            <a href="#">4</a>
+                                            <a href="#" class="nextposts-link"><i class="fa fa-caret-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--profile-edit-wrap end -->
+                        </div>
+                        <!--container end -->
+                    </section>
+                    <!-- section end -->
+                    <div class="limit-box fl-wrap"></div>
+                    <!--section -->
+                    <section class="gradient-bg">
+                        <div class="cirle-bg">
+                            <div class="bg" data-bg="images/bg/circle.png"></div>
+                        </div>
+                        <div class="container">
+                            <div class="join-wrap fl-wrap">
+                                <div class="row">
+                    <div class="col-md-8">
+                        <h3>Avez-vous des questions ?</h3>
+                        <p>Nous sommes disponibles du Lun-Ven 9h-17h&nbsp;&nbsp;&nbsp;Sam 9h-13h CET</p>
+                    </div>
+                    <div class="col-md-4">
+                        <a class="join-wrap-btn" href="contacts.html">Contacter nous
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </div>
+                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- section end -->
+            <a class="to-top"><i class="fa fa-angle-up"></i></a>
+{% endblock %}

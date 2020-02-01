@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {# section #}
+    <section id="sec1">
+        {# container #}
+        <div class="container">
+            {# profile-edit-wrap #}
+            <div class="profile-edit-wrap">
+                <div class="profile-edit-page-header">
+                    <h2>Messages </h2>
+                    <div class="breadcrumbs">
+                        <a href="{{ path('front_page_home') }}">Acceuil</a>
+                        <span>Messages</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        {% include '/partials/vertical-nav.html.twig' %}
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row dashboard-list-box fl-wrap">
+                            <div class="dashboard-header fl-wrap">
+                                <h3>Votre conversation avec {{ other.getUserName() }}</h3>
+                            </div>
+                            {% for message in messages %}
+                                <div class="{{ message.sender == user ? "dashboard-list msg-user" : "dashboard-list msg-other" }}">
+                                    <div class="dashboard-message">
+                                        <div class="dashboard-message-avatar">
+                                            <img src="{{ asset(message.sender.avatar) }}" alt="image de profile">
+                                        </div>
+                                        <div class="dashboard-message-text">
+                                            <div class="msg-body">
+                                                <p class="msg-content">{{ message.content }}</p>
+                                                {% if message.sender == user %}
+                                                    {{ include('front/message/_delete_form.html.twig') }}
+                                                {% endif %}
+                                            </div>
+                                            <div class="msg-infos">
+                                                <span class="reply-mail clearfix">{{ message.status }}</span>
+                                                    <span class="msg-datetime">{{ message.createdAt | date("m/d/Y H:i", "Europe/Paris") }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <tr>
+                                    <td colspan="13">Démarrez la conversation avec {{ other.getUserName() }}</td>
+                                </tr>
+                            {% endfor %}
+                        </div>
+                        {# form #}
+                        <div class="row custom-form">
+                            {{ include('front/message/_form.html.twig') }}
+                        </div>
+                        {# form end #}
+                    </div>
+                </div>
+            </div>
+            {# profile-edit-wrap end #}
+        </div>
+        {# container end #}
+    </section>
+    {# section end #}
+    <div class="limit-box fl-wrap"></div>
+    {# section #}
+    <section class="gradient-bg">
+        <div class="cirle-bg">
+            <div class="bg" data-bg="images/bg/circle.png"></div>
+        </div>
+    </section>
+    {# section end #}
+<a class="to-top"><i class="fa fa-angle-up"></i></a>
+{% endblock %}

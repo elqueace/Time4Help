@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notation index{% endblock %}
+
+{% block body %}
+    <h1>Notation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Rating</th>
+                <th>Comment</th>
+                <th>IsAnonymous</th>
+                <th>IsVisible</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for notation in notations %}
+            <tr>
+                <td>{{ notation.id }}</td>
+                <td>{{ notation.rating }}</td>
+                <td>{{ notation.comment }}</td>
+                <td>{{ notation.isAnonymous ? 'Yes' : 'No' }}</td>
+                <td>{{ notation.isVisible ? 'Yes' : 'No' }}</td>
+                <td>
+<<<<<<< HEAD
+                    <a href="{{ path('notation_show', {'id': notation.id}) }}">show</a>
+                    <a href="{{ path('notation_edit', {'id': notation.id}) }}">edit</a>
+=======
+                    <a href="{{ path('front_notation_show', {'id': notation.id}) }}">show</a>
+                    <a href="{{ path('front_notation_edit', {'id': notation.id}) }}">edit</a>
+>>>>>>> feature/archi
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+<<<<<<< HEAD
+    <a href="{{ path('notation_new') }}">Create new</a>
+=======
+    <a href="{{ path('front_notation_new') }}">Create new</a>
+>>>>>>> feature/archi
+{% endblock %}

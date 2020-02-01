@@ -1,0 +1,20 @@
+{{ form_start(profileForm) }}
+    {{ form_errors(profileForm) }}
+    {{ form_row(profileForm.email) }}
+    {{ form_row(profileForm.pseudo) }}
+    {{ form_row(profileForm.lastname) }}
+    {{ form_row(profileForm.firstname) }}
+    {{ form_row(profileForm.birthday) }}
+    {{ form_row(profileForm.gender) }}
+    {{ form_row(profileForm.phone) }}
+    {{ form_row(profileForm.description) }}
+    <button class="log-submit-btn">
+        <span>Enregistrer</span>
+    </button>
+{{ form_end(profileForm) }}
+
+{# Nom <i class="fa fa-user-o"></i>
+Prénom <i class="fa fa-user-o"></i>
+Adresse Email <i class="fa fa-envelope-o"></i>
+Téléphone <i class="fa fa-phone"></i>
+Adresse <i class="fa fa-map-marker"></i> #}

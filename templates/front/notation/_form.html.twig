@@ -1,0 +1,23 @@
+<div class="list-single-main-item fl-wrap" id="sec5">
+    <div class="list-single-main-item-title fl-wrap">
+        <h3>Ajouter un commentaire et une note</h3>
+    </div>
+    <!-- Add Review Box -->
+    {{ form_start(form, { 'attr': {'class': 'add-comment custom-form'} }) }}
+    <div class="leave-rating-wrap">
+      {{ form_row(form.rating, {'label': 'Votre note :' ,  'attr': {'class': 'leave-rating-title'}}) }}
+        <div class="leave-rating">
+        </div>
+    </div>
+    <div id="add-review" class="add-review-box">
+
+        <fieldset>
+          {{ form_row(form.comment, { 'label': ' ' ,'attr': {'cols': '40', 'rows': '3', 'placeholder': 'Votre Commentaire'} }) }}
+
+          <!-- Review Comment -->
+        </fieldset>
+        <button class="btn  big-btn  color-bg flat-btn">{{ button_label|default('Soumettre') }} <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+        {{ form_end(form) }}
+    </div>
+    <!-- Add Review Box / End -->
+</div>

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Serveat - Connexion{% endblock %}
+
+{% block body %}
+    {# wrapper #}
+    <div id="wrapper">
+        {# content #}
+        <div class="content">
+            {# register form #}
+            <div class="main-register-holder">
+                <div class="main-register fl-wrap">
+                    <h3>Se connecter à <span>Serv<strong>eat</strong></span></h3>
+                    <div id="tabs-container">
+                        <div class="tab">
+                            <div class="tab-content" id="tab-1">
+                                <div class="custom-form">
+                                    <form method="post">
+                                        {% if error %}
+                                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                        {% endif %}
+                                        <label for="inputEmail">Adresse e-mail</label>
+                                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Adresse e-mail" required autofocus onclick="this.select()">
+                                        <label for="inputPassword">Mot de passe</label>
+                                        <input class="form-control" id="inputPassword" name="password" onclick="this.select()" placeholder="Mot de passe" required type="password">
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                        
+                                        <button class="log-submit-btn" style="float:none;" type="submit">
+                                            <span>Se connecter</span>
+                                        </button>
+                                        <div class="clearfix"></div>
+                                        <div class="filter-tags">
+                                            <input id="check-a" name="check" type="checkbox">
+                                            <label for="check-a">Se souvenir de moi</label>
+                                        </div>
+                                    </form>
+                                    <div class="lost_password">
+                                        <a href="#">Mot de passe oublié ?</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# register form end #}
+        </div>
+        {# content end #}
+    </div>
+    {# wrapper end #}
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<!--section -->
+	<section id="sec1">
+		<!-- container -->
+		<div class="container">
+			<!-- profile-edit-wrap -->
+			<div class="profile-edit-wrap">
+				<div class="profile-edit-page-header">
+					<h2>Commentaires</h2>
+					<div class="breadcrumbs"><a href="{{ path('front_page_home') }}">Acceuil</a><a href="#">Administration</a><span>Commentaires</span></div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						{% include 'partials/vertical-nav.html.twig' %}
+					</div>
+					<div class="col-md-9">
+						<div class="dashboard-list-box fl-wrap">
+							<div class="reviews-comments-wrap">
+								{% for notation in notations %}
+									<!-- reviews-comments-item -->
+									<div class="reviews-comments-item">
+										<div class="review-comments-avatar">
+											<img src="{{ asset(notation.giver.avatar) }}" alt="">
+										</div>
+										<div class="reviews-comments-item-text">
+											<h4><a href=#>{{ notation.giver.firstname }}</a></h4>
+											<div class="listing-rating card-popup-rainingvis" data-starrating2="{{ notation.rating }}"></div>
+											<div class="clearfix"></div>
+											<p>" {{ notation.comment }} "</p>
+											<span class="reviews-comments-item-date"><i class="fa fa-calendar-check-o"></i>27 May 2018</span>
+										</div>
+									</div>
+									<!--reviews-comments-item end-->
+								{% else %}
+									<tr>
+										<td colspan="6">no records found</td>
+									</tr>
+								{% endfor %}
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!--profile-edit-wrap end -->
+		</div>
+		<!--container end -->
+	</section>
+	<!-- section end -->
+
+	<div class="limit-box fl-wrap"></div>
+	<!--section -->
+	<section class="gradient-bg">
+		<div class="cirle-bg">
+			<div class="bg" data-bg="images/bg/circle.png"></div>
+		</div>
+	</section>
+	<!-- section end -->
+	<a class="to-top"><i class="fa fa-angle-up"></i></a>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+                <div class="content">
+                    <!--section -->
+                    <section id="sec1">
+                        <!-- container -->
+                        <div class="container">
+                            <!-- profile-edit-wrap -->
+                            <div class="profile-edit-wrap">
+                                <div class="profile-edit-page-header">
+                                    <h2>Add Listing</h2>
+                                    <div class="breadcrumbs"><a href="#">Home</a><a href="#">Dasboard</a><span>Add Listing</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        {% include 'partials/vertical-nav.html.twig' %}
+                                    </div>
+                                    <div class="col-md-9">
+
+                                        <!-- profile-edit-container-->
+                                        <div class="profile-edit-container add-list-container">
+                                            <div class="profile-edit-header fl-wrap">
+                                                <h4>Créer un repas</h4>
+                                            </div>
+                                            <div class="custom-form">
+                                                {{ include('front/meal/_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--profile-edit-wrap end -->
+                        </div>
+                        <!--container end -->
+                    </section>
+                    <!-- section end -->
+                    <div class="limit-box fl-wrap"></div>
+                    <!--section -->
+                    <section class="gradient-bg">
+                        <div class="cirle-bg">
+                            <div class="bg" data-bg="images/bg/circle.png"></div>
+                        </div>
+                        <div class="container">
+                            <div class="join-wrap fl-wrap">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h3>Avez-vous des questions ?</h3>
+                                        <p>Nous sommes disponibles du Lun-Ven 9h-17h&nbsp;&nbsp;&nbsp;Sam 9h-13h CET</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a class="join-wrap-btn" href="contacts.html">Contacter nous
+                                    <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </div>
+                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- section end -->
+            <a class="to-top"><i class="fa fa-angle-up"></i></a>
+
+
+    <!-- <h1>Create new Meal</h1>
+
+
+    <a href="{{ path('front_meal_index') }}">back to list</a>
+    -->
+{% endblock %}

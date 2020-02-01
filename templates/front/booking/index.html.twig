@@ -1,0 +1,255 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <!--section -->
+    <section
+        id="sec1">
+        <!-- container -->
+        <div
+            class="container">
+            <!-- profile-edit-wrap -->
+            <div class="profile-edit-wrap">
+                <div class="profile-edit-page-header">
+                    <h2>Les réservations</h2>
+                    <div class="breadcrumbs">
+                        <a href="{{ path('front_page_home') }}">Acceuil</a>
+                        <span>Reservations</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        {% include 'partials/vertical-nav.html.twig' %}
+                    </div>
+                    <div
+                        class="col-md-9">
+                        <!-- MY-BOOKINGS -->
+                        <div class="row dashboard-list-box fl-wrap" style="margin-bottom:15px;">
+                            <div class="dashboard-header fl-wrap">
+                                <h3>Je souhaite</h3>
+                            </div>
+                            {% for booking in myBookings %}
+                                <!-- dashboard-list start-->
+                                <div class="dashboard-list">
+                                    <div class="dashboard-message">
+                                        <span class="new-dashboard-item">
+                                            <a href="{{ path('front_message_show', {'id': booking.meal.host.id}) }}">
+                                                <i class="fa fa-envelope"></i>
+                                            </a>
+                                        </span>
+                                        {% if not booking.getIsAccepted() %}
+                                            {{ include('front/booking/_delete_form.html.twig') }}
+                                        {% endif %}
+                                        <div class="dashboard-message-avatar">
+                                            {% if booking.meal.host.getAvatar() %}
+                                                <img src="{{ booking.meal.host.getAvatar() }}" alt="">
+                                            {% else %}
+                                                <img alt="" src="/images/favicon/default-avatar.png">
+                                            {% endif %}
+                                        </div>
+                                        <div class="dashboard-message-text">
+                                            <h4><a href="{{ path('front_meal_show', {'id': booking.meal.getId()}) }}">{{ booking.meal.getTitle() }}</h4>
+                                            <div class="booking-details fl-wrap">
+                                                <span class="booking-title">Dates de la réservation
+                                                </span>
+                                                :
+                                                <span class="booking-text">{{ booking.meal.getDateMeal() | date("m/d/Y à h:m", "Europe/Paris") }}</span>
+                                            </div>
+                                            <div class="booking-details fl-wrap">
+                                                <span class="booking-title">Chez
+                                                </span>
+                                                :
+                                                <span class="booking-text">
+                                                    {% if not booking.meal.host.getGender() %}
+                                                        M.
+                                                    {% else %}
+                                                        Mme
+                                                    {% endif %}
+                                                    {{ booking.meal.host.getUserName() }}
+                                                </span>
+                                            </div>
+                                            <div class="booking-details fl-wrap">
+                                                <span class="booking-title">Adresse
+                                                </span>
+                                                :
+                                                <span class="booking-text">
+                                                    <a href="#" target="_top">{{ booking.meal.address.getStreet() }},
+                                                        {{ booking.meal.address.getZc() }}
+                                                        {{ booking.meal.address.getCity() }}
+                                                        -
+                                                        {{ booking.meal.address.getCountry() }}</a>
+                                                </span>
+                                            </div>
+                                            <div class="booking-details fl-wrap">
+                                                <span class="booking-title">E-mail
+                                                </span>
+                                                :
+                                                <span class="booking-text">{{ booking.meal.host.getEmail() }}</span>
+                                            </div>
+                                            <div class="booking-details fl-wrap">
+                                                <span class="booking-title">Téléphone
+                                                </span>
+                                                :
+                                                <span class="booking-text">{{ booking.meal.host.getPhone() }}</span>
+                                            </div>
+                                            <div class="booking-details fl-wrap">
+                                                <span class="booking-title">Nb d'invités max
+                                                </span>
+                                                :
+                                                <span class="booking-text">{{ booking.meal.getMaxTraveller() }}</span>
+                                            </div>
+                                            <div class="booking-details fl-wrap">
+                                                <span class="booking-title">Prix
+                                                </span>
+                                                :
+                                                <span class="booking-text">{{ booking.meal.getPrice() | price}}</span>
+                                            </div>
+                                            {% for type in booking.meal.getTypes() %}
+                                                <p>
+                                                    <a class="btn  circle-btn color-bg flat-btn" href="#">{{ type.getTitle() }}</a>
+                                                </p>
+                                            {% endfor %}
+                                            {% if booking.isAccepted and booking.isPayed %}
+                                                <button class="btn circle-btn color-bg flat-btn" disabled>Repas payé</button>
+                                            {% elseif  booking.isAccepted %}
+                                                <a href="{{ path('payment', {'paymentId': booking.getTraveler().getCustomerPaymentId(), 'amount': booking.getMeal().getPrice(), 'mealId': booking.getMeal().getId(), 'travellerId': booking.getTraveler().getId() }) }}" class="btn circle-btn color-bg flat-btn">Payer</a>                                            
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- dashboard-list end-->
+                            {% else %}
+                                <p>Vous n'avez fait aucune demande de réservation</p>
+                            {% endfor %}
+                        </div>
+                        <!-- pagination-->
+                        <!--<div class="pagination">
+                                                    <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
+                                                    <a href="#" class="current-page">1</a>
+                                                    <a href="#">2</a>
+                                                    <a href="#">3</a>
+                                                    <a href="#">4</a>
+                                                    <a href="#" class="nextposts-link"><i class="fa fa-caret-right"></i></a>
+                                                </div>-->
+
+                        <!-- TRAVELERS-BOOKINGS -->
+                            <div class="row dashboard-list-box fl-wrap"> <div class="dashboard-header fl-wrap">
+                                <h3>Je reçois</h3>
+                            </div>
+                            {% for booking in myTravelersBookings %}
+                                <!-- dashboard-list start-->
+                                <div class="dashboard-list">
+                                    <div class="dashboard-message">
+                                        <span class="new-dashboard-item">
+                                            <a href="{{ path('front_message_show', {'id': booking.traveler.id}) }}">
+                                                <i class="fa fa-envelope"></i>
+                                            </a>
+                                        </span>
+                                        <div class="dashboard-message-avatar">
+                                            {% if booking.traveler.getAvatar() %}
+                                                <img src="{{ booking.traveler.getAvatar() }}" alt="">
+                                            {% else %}
+                                                <img alt="" src="/images/favicon/default-avatar.png">
+                                            {% endif %}
+                                        </div>
+                                        <div class="dashboard-message-text">
+                                            <h4>
+                                                {% if not booking.traveler.getGender() %}
+                                                    M.
+                                                {% else %}
+                                                    Mme
+                                                {% endif %}
+                                                {{ booking.traveler.getUserName() }}
+                                            </h4>
+                                            <div class="booking-details fl-wrap">
+                                                <span class="booking-title">Dates de la réservation
+                                                </span>
+                                                :
+                                                <span class="booking-text">{{ booking.meal.getDateMeal() | date("m/d/Y à h:m", "Europe/Paris") }}</span>
+                                            </div>
+                                            <div class="booking-details fl-wrap">
+                                                <span class="booking-title">Votre addresse de réception
+                                                </span>
+                                                :
+                                                <span class="booking-text">
+                                                    <a href="#" target="_top">{{ booking.meal.address.getStreet() }},
+                                                        {{ booking.meal.address.getZc() }}
+                                                        {{ booking.meal.address.getCity() }}
+                                                        -
+                                                        {{ booking.meal.address.getCountry() }}</a>
+                                                </span>
+                                            </div>
+                                            <div class="booking-details fl-wrap">
+                                                <span class="booking-title">Nb d'invités max
+                                                </span>
+                                                :
+                                                <span class="booking-text">{{ booking.meal.getMaxTraveller() }}</span>
+                                            </div>
+                                            <div class="booking-details fl-wrap">
+                                                <span class="booking-title">Prix
+                                                </span>
+                                                :
+                                                <span class="booking-text">{{ booking.meal.getPrice() | price}}</span>
+                                            </div>
+                                            {% for type in booking.meal.getTypes() %}
+                                                <p>
+                                                    <a class="btn  circle-btn color-bg flat-btn" href="#">{{ type.getTitle() }}</a>
+                                                </p>
+                                            {% endfor %}
+                                            {% if not booking.isAccepted %}
+                                                <a href="/bookings/accepteHote/{{ booking.getId() }}" class="btn circle-btn color-bg flat-btn">Accepter</a>
+                                            {% else %}
+                                                <button class="btn circle-btn color-bg flat-btn" disabled>Vous avez accepté</button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- dashboard-list end-->
+                            {% else %}
+                                <p>Vous n'avez reçu aucune demande de réservation</p>
+                            {% endfor %}
+                        </div>
+                        <!-- pagination-->
+                        <!--<div class="pagination">
+                                                    <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
+                                                    <a href="#" class="current-page">1</a>
+                                                    <a href="#">2</a>
+                                                    <a href="#">3</a>
+                                                    <a href="#">4</a>
+                                                    <a href="#" class="nextposts-link"><i class="fa fa-caret-right"></i></a>
+                                                </div>-->
+
+                    </div>
+                </div>
+            </div>
+            <!--profile-edit-wrap end -->
+        </div>
+        <!--container end -->
+    </section>
+    <!-- section end -->
+    <div class="limit-box fl-wrap"></div>
+    <!--section -->
+    <section class="gradient-bg">
+        <div class="cirle-bg">
+            <div class="bg" data-bg="images/bg/circle.png"></div>
+        </div>
+        <div class="container">
+            <div class="join-wrap fl-wrap">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3>Avez-vous des questions ?</h3>
+                        <p>Nous sommes disponibles du Lun-Ven 9h-17h&nbsp;&nbsp;&nbsp;Sam 9h-13h CET</p>
+                    </div>
+                    <div class="col-md-4">
+                        <a class="join-wrap-btn" href="contacts.html">Contacter nous
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section end -->
+    <a class="to-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+{% endblock %}

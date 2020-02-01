@@ -1,0 +1,14 @@
+# Déclaration d'une nouvelle métrique
+metrics:
+  services:
+    label: "Appels du Container de Services"
+    matching_calls:
+      php:
+      - callee: "=Symfony\Component\DependencyInjection\Container::get"
+
+tests:
+  "Tests des appels au Container de Services"
+  path: "/.*"
+  assertions:
+  - metrics.services.count < 30
+  - metrics.services.wall_time < 20ms

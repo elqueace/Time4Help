@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Serveat - Inscription{% endblock %}
+
+{% block body %}
+    {# register form #}
+    <div class="main-register-holder">
+        <div class="main-register fl-wrap">
+            <h3>
+                Inscription sur <span>Serv<strong>eat</strong></span>
+            </h3>
+            <div id="tabs-container">
+                <div class="tab">
+                    <div class="tab-content" id="tab-1">
+                        <div class="custom-form">
+                            {{ form_start(registrationForm) }}
+                                {{ form_row(registrationForm.avatar) }}
+                                {{ form_row(registrationForm.pseudo) }}
+                                {{ form_row(registrationForm.firstname) }}
+                                {{ form_row(registrationForm.lastname) }}
+                                {{ form_row(registrationForm.email) }}
+                                {{ form_row(registrationForm.plainPassword) }}
+                                <button class="log-submit-btn">
+                                    <span>Créer mon compte</span>
+                                </button>
+                            {{ form_end(registrationForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# register form end #}
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
+    <script>
+        var $collectionHolder;
+
+        // setup an "add a tag" link
+        var $addPictureButton = $('');
+        var $newLinkLi = $('<li></li>').append($addPictureButton);
+
+        jQuery(document).ready(function () { // Get the ul that holds the collection of tags
+            $collectionHolder = $('ul.pictures');
+
+            // add the "add a tag" anchor and li to the tags ul
+            $collectionHolder.append($newLinkLi);
+
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+            addPictureForm($collectionHolder, $newLinkLi);
+        });
+
+        function addPictureForm($collectionHolder, $newLinkLi) { // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+            // get the new index
+            var index = $collectionHolder.data('index');
+
+            var newForm = prototype;
+            // You need this only if you didn't set 'label' => false in your tags field in TaskType
+            // Replace '__name__label__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            // newForm = newForm.replace(/__name__label__/g, index);
+
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            newForm = newForm.replace(/__name__/g, index);
+
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+    </script>
+{% endblock %}

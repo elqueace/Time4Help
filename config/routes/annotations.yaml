@@ -1,0 +1,13 @@
+controllers:
+    resource: ../../src/Controller/
+    type: annotation
+controllers_front:
+    resource: ../../src/Controller/Front
+    type: annotation
+controllers_back:
+    resource: ../../src/Controller/Back
+    type: annotation
+    prefix: /admin
+logout:
+    path: /logout
+

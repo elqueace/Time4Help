@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement{% endblock %}
+
+{% block body %}
+
+
+
+<!--content-->  
+                <div class="content">
+                    <!--section -->  
+                    <section id="sec1">
+                        <div class="container">
+                            <div class="row">
+                                <div class="offset-md-3 col-md-6">
+                                    <div class="list-single-main-item fl-wrap">
+                                        <div class="list-single-main-item-title fl-wrap">
+                                            <h3>Payment <span>Form </span><img style="width:200px;height:40px;float:right;" src="{{ asset('images/all/payment-cards.png') }}" alt="payment-cards"></h3>
+                                        </div>
+                                        <div id="contact-form">
+                                            <div id="message"></div>
+                                            <form class="custom-form" action="/charge" method="post" id="payment-form">
+                                              <fieldset>
+                                            <div class="form-row">
+                                            <label for="card-element">Credit or debit card</label>
+                                            <div id="card-element"><!-- A Stripe Element will be inserted here. --></div>
+                                            <!-- Used to display Element errors. -->
+                                            <div id="card-errors" role="alert"></div></div>
+                                            <input type="hidden" id="amount" name="amount" value="{{ app.request.query.get('amount') }}">
+                                            <input type="hidden" id="paymentId" name="paymentId" value="{{app.request.query.get('paymentId')}}">
+                                          </fieldset>
+                                                <button class="btn  big-btn  color-bg flat-btn">Payer</i></button>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- section end -->
+                    <div class="limit-box fl-wrap"></div>
+                    <!--section -->  
+                    <section class="gradient-bg">
+                        <div class="cirle-bg">
+                            <div class="bg" data-bg="images/bg/circle.png"></div>
+                        </div>
+                        <div class="container">
+                            <div class="join-wrap fl-wrap">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h3>Join our online community</h3>
+                                        <p>Grow your marketing and be happy with your online business</p>
+                                    </div>
+                                    <div class="col-md-4"><a href="#" class="join-wrap-btn modal-open">Sign Up <i class="fa fa-sign-in"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- section end -->
+                </div>
+                <!-- contentend -->
+{% endblock %}

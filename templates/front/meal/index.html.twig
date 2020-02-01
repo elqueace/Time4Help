@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+                    <!--section -->
+                    <section id="sec1">
+                        <!-- container -->
+                        <div class="container">
+                            <!-- profile-edit-wrap -->
+                            <div class="profile-edit-wrap">
+                                <div class="profile-edit-page-header">
+                                    <h2>Mes Repas</h2>
+                                    <div class="breadcrumbs"><a href="#">Home</a><a href="#">Administration</a><span>Repas</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        {% include 'partials/vertical-nav.html.twig' %}
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="dashboard-list-box fl-wrap">
+
+                                            <div class="reviews-comments-wrap" style="width: 100%">
+                                                <!-- reviews-comments-item -->
+                                                {% for meal in meals %}
+                                                <div class="reviews-comments-item">
+                                                    <div class="review-comments-avatar">
+                                                        <a href="{{ path('front_meal_show', {'id': meal.id}) }}"><img src="{{ asset('images/all/italian1.jpg') }}" alt=""></a>
+                                                    </div>
+                                                    <div class="reviews-comments-item-text text-no-overflow">
+                                                        <h4><a href="{{ path('front_meal_show', {'id': meal.id}) }}" class="reviews-comments-item-link">{{ meal.title }}</a></h4>
+                                                        <div class="listing-rating card-popup-rainingvis">{{ meal.price }}€ / personne</div>
+                                                        <div class="clearfix"></div>
+                                                        <p style="">{{ meal.description | raw }}</p>
+                                                        <span class="reviews-comments-item-date"><i class="fa fa-calendar-check-o"></i>{{ meal.dateMeal ? meal.dateMeal|date('Y-m-d H:i:s') : '' }}</span>
+                                                    </div>
+                                                </div>
+                                                {% else %}
+                                                    <tr>
+                                                        <td colspan="7">no records found</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                <!--reviews-comments-item end-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--profile-edit-wrap end -->
+                        </div>
+                        <!--container end -->
+                    </section>
+                    <!-- section end -->
+                    <div class="limit-box fl-wrap"></div>
+                    <!--section -->
+                    <section class="gradient-bg">
+                        <div class="cirle-bg">
+                            <div class="bg" data-bg="images/bg/circle.png"></div>
+                        </div>
+                    </section>
+                    <!-- section end -->
+            <a class="to-top"><i class="fa fa-angle-up"></i></a>
+
+{% endblock %}

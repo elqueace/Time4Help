@@ -1,0 +1,82 @@
+
+{# register form #}
+<div class="main-register-wrap modal"> <div class="main-overlay"></div>
+    <div class="main-register-holder">
+        <div class="main-register fl-wrap">
+            <div class="close-reg">
+                <i class="fa fa-times"></i>
+            </div>
+            <h3>Sign In
+                <span>City<strong>Book</strong>
+                    </span>
+            </h3>
+            <div class="soc-log fl-wrap">
+                <p>For faster login or register use your social account.</p>
+                <a class="facebook-log" href="#">
+                    <i class="fa fa-facebook-official"></i>Log in with Facebook</a>
+                <a class="twitter-log" href="#">
+                    <i class="fa fa-twitter"></i>
+                    Log in with Twitter</a>
+            </div>
+            <div class="log-separator fl-wrap">
+                <span>or</span>
+            </div>
+            <div id="tabs-container">
+                <ul class="tabs-menu">
+                    <li class="current">
+                        <a href="#tab-1">Login</a>
+                    </li>
+                    <li>
+                        <a href="#tab-2">Register</a>
+                    </li>
+                </ul>
+                <div class="tab">
+                    <div class="tab-content" id="tab-1">
+                        <div class="custom-form">
+                            <form method="post" name="registerform">
+                                <label>Username or Email Address *
+                                </label>
+                                <input name="email" onclick="this.select()" type="text" value="">
+                                <label>Password *
+                                </label>
+                                <input name="password" onclick="this.select()" type="password" value="">
+                                <button class="log-submit-btn" type="submit">
+                                    <span>Log In</span>
+                                </button>
+                                <div class="clearfix"></div>
+                                <div class="filter-tags">
+                                    <input id="check-a" name="check" type="checkbox">
+                                    <label for="check-a">Remember me</label>
+                                </div>
+                            </form>
+                            <div class="lost_password">
+                                <a href="#">Lost Your Password?</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab">
+                        <div class="tab-content" id="tab-2">
+                            <div class="custom-form">
+                                <form class="main-register-form" id="main-register-form2" method="post" name="registerform">
+                                    <label>First Name *
+                                    </label>
+                                    <input name="name" onclick="this.select()" type="text" value="">
+                                    <label>Second Name *</label>
+                                    <input name="name2" onclick="this.select()" type="text" value="">
+                                    <label>Email Address *</label>
+                                    <input name="email" onclick="this.select()" type="text" value="">
+                                    <label>Password *</label>
+                                    <input name="password" onclick="this.select()" type="password" value="">
+                                    <button class="log-submit-btn" type="submit">
+                                        <span>Register</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--register form end -->

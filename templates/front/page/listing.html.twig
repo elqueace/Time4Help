@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="container">
+    <div class="col-md-12">
+    <!--  section  --> 
+                    <section class="gray-bg no-pading no-top-padding" id="sec1">
+                        <div class="col-list-wrap  center-col-list-wrap left-list">
+                            <div class="container">
+                                <div class="listsearch-maiwrap box-inside fl-wrap">
+                                    <div class="listsearch-header fl-wrap">
+                                        <h3>Resultats pour : <span>{{adress}}</span></h3>
+                                        <div class="listing-view-layout">
+                                            <ul>
+                                                <li><a class="list active" href="#"><i class="fa fa-list-ul"></i></a></li>
+                                                <li><a class="grid" href="#"><i class="fa fa-th-large"></i></a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- listsearch-input-wrap end -->   
+                                </div>
+                                <!-- list-main-wrap-->
+                                <div class="list-main-wrap fl-wrap card-listing">
+                                    <div class="clearfix"></div>
+                                                    {% for meal in meals %}
+
+                                    <!-- listing-item -->
+                                    <div class="listing-item ">
+                                        <article class="geodir-category-listing fl-wrap">
+                                            <div class="geodir-category-img">
+                                                <a href="{{ path('front_meal_show', {'id': meal.id}) }}"><img src="{{ asset('images/all/italian1.jpg') }}" alt=""></a>
+                                                <div class="overlay"></div>
+                                                <div class="list-post-counter"><span>{{ meal.notations.count() }}</span><i class="fa fa-comment"></i></div>
+                                            </div>
+                                            <div class="geodir-category-content fl-wrap text-no-overflow">
+                                                <div class="listing-avatar"><a href="{{ path('front_meal_show', {'id': meal.id}) }}"><img src="" alt=""></a>
+                                                </div>
+                                                </span><a >By {{ meal.host.firstname }} {{ meal.host.lastName }}</a>
+
+                                                <h3><a href="{{ path('front_meal_show', {'id': meal.id}) }}" class="reviews-comments-item-link">{{ meal.title }}</a></h3>
+
+                                                <p>{{ meal.description |raw }}</p>
+
+                                            </div>
+                                            
+                                            <div class="geodir-category-content fl-wrap ">
+                                            <div class="geodir-category-options fl-wrap">
+                                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="5">
+                                                        <div class="listing-rating card-popup-rainingvis">{{ meal.price }}€ / personne</div>
+                                                    </div>
+                                                    <div class="geodir-category-location"><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ meal.address.street }} {{ meal.address.city }} {{ meal.address.country }}</a></div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <!-- listing-item end-->
+                                    {% else %}
+                                    <div class="listing-item">
+                                        no records found
+                                    </div>
+                                    <br> <br>
+                                {% endfor %}               
+                                    <!-- pagination
+                                    <div class="pagination">
+                                        <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
+                                        <a href="#" class="blog-page transition">1</a>
+                                        <a href="#" class="blog-page current-page transition">2</a>
+                                        <a href="#" class="blog-page transition">3</a>
+                                        <a href="#" class="blog-page transition">4</a>
+                                        <a href="#" class="nextposts-link"><i class="fa fa-caret-right"></i></a>
+                                    </div>
+                                    -->
+                                </div>
+                                <!-- list-main-wrap end-->                           
+                            </div>
+                        </div>
+                    </section>
+                    <!--  section  end-->
+    </div>
+</div>
+{% endblock %}

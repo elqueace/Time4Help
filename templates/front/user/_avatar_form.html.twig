@@ -1,0 +1,10 @@
+{{ form_start(avatarForm, {attr: {class: 'avatar-form'} }) }}
+    {{ form_row(avatarForm.avatar) }}
+    <img src="{{ asset(app.user.avatar) }}" class="avatar-img" alt="image profil" width="200" height="200">
+    <button class="log-submit-btn">
+        <span>
+            <i class="fa fa-upload"></i>
+            Envoyer Photo
+        </span>
+    </button>
+{{ form_end(avatarForm) }}
