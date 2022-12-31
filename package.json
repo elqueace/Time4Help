@@ -1,6 +1,6 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.23.0",
+        "@symfony/webpack-encore": "^4.2.0",
         "bootstrap": "^4.2.1",
         "bootstrap3": "^3.3.5",
         "popper.js": "^1.14.7",
@@ -19,6 +19,6 @@
         "leaflet-geosearch": "^2.7.0",
         "modernizr": "^3.6.0",
         "node-sass": "^4.11.0",
-        "sass-loader": "^7.1.0"
+        "sass-loader": "^13.2.0"
     }
 }
